@@ -18,6 +18,14 @@ buildscript {
     }
 }
 
+ext {
+    tinker = [
+            id:"tinker_"+ "${VERSION_NAME}".replaceAll("\\.","") +
+                    (TINKER_PACK_PATCH.toBoolean() ?
+                            "_patch_v${TINKER_PATCH_VERSION}":"")
+    ]
+}
+
 allprojects {
     repositories {
         google()
