@@ -20,11 +20,15 @@ import android.os.Handler;
 import android.os.Looper;
 import android.widget.Toast;
 
+import com.example.az.mytinkerdemo.Const;
+import com.example.az.mytinkerdemo.MessageEvent;
 import com.example.az.mytinkerdemo.tinker.Utils;
 import com.tencent.tinker.lib.service.DefaultTinkerResultService;
 import com.tencent.tinker.lib.service.PatchResult;
 import com.tencent.tinker.lib.util.TinkerLog;
 import com.tencent.tinker.lib.util.TinkerServiceInternals;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 
@@ -86,6 +90,8 @@ public class SampleResultService extends DefaultTinkerResultService {
                 TinkerLog.i(TAG, "I have already install the newly patch version!");
             }
         }
+    
+        EventBus.getDefault().post(new MessageEvent(Const.EVENT_TYPE_PATCH_RESULT, result.isSuccess));
     }
 
     /**
