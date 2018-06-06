@@ -20,6 +20,7 @@ buildscript {
 
 ext {
     tinker = [
+            enabled: hasProperty("TINKER_ENABLE"),
             id:"tinker_"+ "${VERSION_NAME}".replaceAll("\\.","") +
                     (TINKER_PACK_PATCH.toBoolean() ?
                             "_patch_v${TINKER_PATCH_VERSION}":"")

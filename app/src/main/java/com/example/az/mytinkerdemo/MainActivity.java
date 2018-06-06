@@ -1,10 +1,12 @@
 package com.example.az.mytinkerdemo;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -78,9 +80,26 @@ public class MainActivity extends AppCompatActivity {
 		boolean isSuccess = (boolean) messageEvent.data;
 		Log.d("test_wp", "-------------->> isSuccess =  " + isSuccess);
 		if (isSuccess) {
-			restartApplication();
-			TinkerManager.killSelf(MainActivity.this);
+			showDialog();
 		}
+	}
+	
+	private void showDialog() {
+		new AlertDialog.Builder(this)
+				.setMessage("修复成功, 重启生效.\n 立即重启吗?")
+				.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialogInterface, int i) {
+						restartApplication();
+						TinkerManager.killSelf(MainActivity.this);
+					}
+				})
+				.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialogInterface, int i) {
+					
+					}
+				}).show();
 	}
 	
 	private void restartApplication() {
